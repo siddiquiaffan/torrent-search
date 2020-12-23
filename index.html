@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <script src="https://kit.fontawesome.com/95931f8504.js" crossorigin="anonymous"></script>
+    <title>Torrent Search By Affan</title>
+  </head>
+  <body>
+    <h2 class="text-center p-3 text-white" style="z-index: 1;">Torrent Search by <a href="https://github.com/AffanTheBest/utilities/tree/main/torrent-search">Affan</a></h2>
+    <i class="far fa-sun fa-2x" onclick="changeTheme()"></i>
+    <div class="main">
+            <div class="center">
+                   <!-- <div class="d-lg-flex p-5 shadow search_div">
+                      <input id="query" type="text" class="form-control" placeholder="Enter Your Query">
+                      <button id="submit" class="btn btn-primary" onclick="find()">Search</button>
+                   </div> -->
+                   <form action="" class="form" id="form"></form>
+                   <div class="input-group py-5 px-2 search_div">
+                      <input type="search" class="form-control shadow" id="query" placeholder="Enter Your Query" onsearch="find()">
+                      <input type="submit" class="input-group-text btn btn-primary shadow" id="submit" value="Search" onclick="find()">
+                  </div>
+                </form>
+
+                   <div class="animation" id="loading"></div>
+                <div class="result mx-auto" id="result">
+                    <h1 class="text-center text-white font-weight-bold">Result</h1>
+                    <h3 class="text-left mb-2" id="query_name"></h3>
+                    <div class="res1">
+                        <h5 class="text-left mt-4" id="title1">Title : </h5>
+                        <h5 class="text-left my-1" id="leechers1">Leechers : </h5>
+                        <h5 class="text-left my-1" id="seeders1">Seeders : </h5>
+                        <h5 class="text-left my-1" id="size1">Size : </h5>
+                        <h6 class="text-left mt-3">Magnet Link : </h6>
+                        <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;" s id="magnet1" onclick="copy()"></textarea>
+                        <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet1')">COPY</button>
+                    </div>
+
+                    <div class="res2">
+                      <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
+                      <h5 class="text-left mt-4" id="title2">Title : </h5>
+                      <h5 class="text-left my-1" id="leechers2">Leechers : </h5>
+                      <h5 class="text-left my-1" id="seeders2">Seeders : </h5>
+                      <h5 class="text-left my-1" id="size2">Size : </h5>
+                      <h6 class="text-left mt-3">Magnet Link : </h6>
+                      <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;" s id="magnet2" onclick="copy()"></textarea>
+                      <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet2')">COPY</button>
+                  </div>
+
+                  <div class="res3">
+                    <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
+                    <h5 class="text-left mt-4" id="title3">Title : </h5>
+                    <h5 class="text-left my-1" id="leechers3">Leechers : </h5>
+                    <h5 class="text-left my-1" id="seeders3">Seeders : </h5>
+                    <h5 class="text-left my-1" id="size3">Size : </h5>
+                    <h6 class="text-left mt-3">Magnet Link : </h6>
+                    <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;" s id="magnet3" onclick="copy()"></textarea>
+                    <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet3')">COPY</button>
+                </div>
+
+                <div class="res4">
+                  <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
+                  <h5 class="text-left mt-4" id="title4">Title : </h5>
+                  <h5 class="text-left my-1" id="leechers4">Leechers : </h5>
+                  <h5 class="text-left my-1" id="seeders4">Seeders : </h5>
+                  <h5 class="text-left my-1" id="size4">Size : </h5>
+                  <h6 class="text-left mt-3">Magnet Link : </h6>
+                  <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;" s id="magnet4" onclick="copy()"></textarea>
+                  <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet4')">COPY</button>
+              </div>
+
+              <div class="res5">
+                <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
+                <h5 class="text-left mt-4" id="title5">Title : </h5>
+                <h5 class="text-left my-1" id="leechers5">Leechers : </h5>
+                <h5 class="text-left my-1" id="seeders5">Seeders : </h5>
+                <h5 class="text-left my-1" id="size5">Size : </h5>
+                <h6 class="text-left mt-3">Magnet Link : </h6>
+                <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;" s id="magnet5" onclick="copy()"></textarea>
+                <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet5')">COPY</button>
+            </div>
+            </div>
+      </div>
+      <footer class="footer text-center text-muted m3-2 mt-3" id="footer">
+        This website is made with cyberboysumanjay's torrent API.
+        <a href="https://github.com/cyberboysumanjay/APIs#1-torrent-search-mag">Read More</a>        
+      </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </body>
+</html>
