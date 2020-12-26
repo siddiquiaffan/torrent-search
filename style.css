@@ -139,6 +139,19 @@ body:before{
 #query_name {
     text-shadow: 0 0 15px rgba(0,0,0);
 }
+h5::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+h5::-webkit-scrollbar-track{
+    background: #161049;
+}
+h5::-webkit-scrollbar-thumb{
+    background: rgb(93, 94, 165);
+}
+h5::-webkit-scrollbar-thumb:hover{
+    background: rgb(65, 59, 136);
+}
 
 #title1,#title2,#title3,#title4,#title5 {
     /* overflow: none; */
@@ -155,7 +168,8 @@ body:before{
 }
 
 .magnet::-webkit-scrollbar{
-    width: 4px;
+    width: 1.5px;
+    height: 1.5px;
 }
 .magnet::-webkit-scrollbar-track{
     background: #161049;
@@ -192,5 +206,8 @@ body:before{
     #submit{
         width: 80px;
         margin: 20px 0;
+    }
+    #title1,#title2,#title3,#title4,#title5{
+        overflow-x: auto;
     }
 }

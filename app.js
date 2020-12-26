@@ -20,8 +20,8 @@ function find() {
             result.style.display = "block";
             if(actualdata[0] == undefined){
                 result.style.display = "none";
-            }else { 
-                query_name.textContent ="You searched for " + `'${query}'` ;
+            }else {
+                query_name.textContent = "You searched for " + `'${query.value}'`;
                 document.querySelector('#magnet1').disabled = true;
                 document.querySelector('#title1').textContent = "Title : "+ actualdata[0].name;
                 document.querySelector('#leechers1').textContent = "Leechers : " + actualdata[0].leecher;
