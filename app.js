@@ -6,20 +6,19 @@ function find() {
     let query_name = document.querySelector('#query_name');
     result.style.display = 'none';
 
-    let query = document.querySelector('#query').value;
+    let query = document.querySelector('#query');
         if(query == ''){
             alert('Please enter a valid query');
         }else{
             loading.style.display = 'block';
-        }
-        fetch('https://api.sumanjay.cf/torrent/?query='+query).then((apidata) => {
-            return apidata.json();
-        }).then((actualdata) => {
             query.disabled = true;
             query.disabled = false;
+        }
+        fetch('https://api.sumanjay.cf/torrent/?query='+query.value).then((apidata) => {
+            return apidata.json();
+        }).then((actualdata) => {
             result.style.display = "block";
-            if(actualdata[0] == undefined) {
-                swal("Sorry!","Sorry , we couldn't find torrent related to your query. \n Please try with some other query.","error");
+            if(actualdata[0] == undefined){
                 result.style.display = "none";
             }else { 
                 query_name.textContent ="You searched for " + `'${query}'` ;
@@ -73,8 +72,17 @@ function find() {
                 document.querySelector('#seeders5').textContent = "Seeders : " + actualdata[4].seeder;
                 document.querySelector('#size5').textContent = "Size  : " + actualdata[4].size;
                 document.querySelector('#magnet5').value = actualdata[4].magnet;
-            }
+            }   
+            
             loading.style.display = 'none';
+            query.placeholder = "Enter Your query";
+
+        }).catch(function(err){
+            swal("Sorry!","Sorry , we couldn't find torrent related to your query. Please try with some other query.","error");
+            loading.style.display= "none";
+            query.value = "";
+            query.placeholder = "Please try with some other keyword";
+            query.disabled = false;
         })
         };
 
@@ -83,7 +91,7 @@ function find() {
         navigator.clipboard.writeText(text.value).then(()=>{
             swal("Success","Magnet URL copied to to clipboard!","success");
         }).catch((error)=>{
-            swal("An error has been occurred while copying magnet , Please copy it manually",error, "error");
+            swal("An error has been occurred while copying magnet , Please copy it manually","error");
         });
     }
 
