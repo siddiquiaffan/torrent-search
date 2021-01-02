@@ -1,4 +1,6 @@
-
+window.onload = function() {
+    document.querySelector('#query').focus();
+}
 function find() {
     let result = document.getElementById("result");
     let submit = document.querySelector('#submit');
