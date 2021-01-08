@@ -196,6 +196,12 @@ h5::-webkit-scrollbar-thumb:hover{
     transform: translateX(-50%);
 }
 @media (max-width: 768px){
+    .theme{
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height:35px;
+    }
     .result{
         width: 88vw;
     }
