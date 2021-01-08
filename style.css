@@ -43,11 +43,14 @@ body:before{
     z-index: -1;
 }
 
-.fa-sun{
+.theme{
+    width: 40px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 25px;
+    right: 30px;
     cursor: pointer;
+    border: 2px dashed #00ffe5;
+    border-radius: 50%;
 }
 @keyframes rotateRight {
     from {transform: rotate(0deg);}
