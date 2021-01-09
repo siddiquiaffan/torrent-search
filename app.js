@@ -109,7 +109,9 @@ function find() {
         document.querySelector(".center").style.background = "var(--center-bg-light)";
         document.querySelector("h1").classList.replace("text-white", "text-dark");
         document.querySelector("h2").classList.replace("text-white","text-dark");
-        document.querySelector("hr").style.background = "#000";
+        document.querySelectorAll("HR").forEach(function(element) {
+            element.style.background = "#000";
+        });
         document.querySelector("#footer").style.background = "var(--main-bg-light)";
         document.querySelector("#footer").style.color = "var(--text-light)";
         document.querySelector(".theme").style.border = "2px dashed #ff0095";
@@ -128,9 +130,9 @@ function find() {
         document.querySelector("hr").style.background = "#fff";
         document.querySelector("#footer").style.background = "var(--main-bg-dark)";
         document.querySelector("#footer").style.color = "var(--text-dark)";
-        document.querySelector(".theme").style.border = "2px dashed #00ffe5";
+        document.querySelector(".theme").style.border = "2px dashed #00ffe5 ";
     }
-
+ 
     function changeTheme(){
         if(isLight == false){
             toLight();
