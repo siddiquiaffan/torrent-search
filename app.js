@@ -9,6 +9,7 @@ const setHeaders = {
 
 async function find() {
     let result = document.getElementById("result");
+    let result_div = document.getElementById("result_div");
     let submit = document.querySelector('#submit');
     let loading = document.querySelector('#loading');
     let query_name = document.querySelector('#query_name');
@@ -30,10 +31,10 @@ async function find() {
         if(actualdata[0] == undefined){
             result.style.display = 'none';
         }else{
-            result.innerHTML = "";
-            console.log(actualdata);
+            result_div.innerHTML = "";
             result.style.display = 'block';
             loading.style.display = 'none';
+            query_name.innerHTML = `<span>You searched for <i>'${query.value}'</i>.</span>`;
                 for(let i=0; i < 10; i++) {
                     var htmlData =`<div class="res${i+1}">
                     <h5 class="text-left mt-4">Title : ${actualdata[i].name}</h5>
@@ -46,7 +47,7 @@ async function find() {
                     <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
                     </div> `; 
                     // result.insertAdjacentElement('beforeend',htmlData);
-                    result.innerHTML += htmlData;
+                    result_div.innerHTML += htmlData;
                 }
             query.placeholder = "Enter Your query";
 
