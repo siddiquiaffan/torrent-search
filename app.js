@@ -30,6 +30,7 @@ async function find() {
         if(actualdata[0] == undefined){
             result.style.display = 'none';
         }else{
+            result.innerHTML = "";
             console.log(actualdata);
             result.style.display = 'block';
             loading.style.display = 'none';
@@ -63,7 +64,7 @@ async function find() {
         // FUnuction to copy magnet to clipboard
     function copy(id){
             let text = document.querySelector(`#${id}`); 
-        navigator.clipboard.writeText(text.value).then(()=>{
+            navigator.clipboard.writeText(text.value).then(()=>{
             swal("Success","Magnet URL copied to to clipboard!","success");
         }).catch((error)=>{
             swal("An error has been occurred while copying magnet , Please copy it manually","error");
