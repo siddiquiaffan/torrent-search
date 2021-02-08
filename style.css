@@ -2,8 +2,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: none;
 }
-
+body {
+    transition: 1.3s all;
+}
 :root{
     --main-bg-dark : rgb(26, 24, 51);
     --main-bg-light : rgb(255 , 255, 255);
@@ -134,6 +137,7 @@ body:before{
     margin: 0 0 20px 0;
     background: rgba(255,255,255, 0.016);
     display: none;
+    transition: none!important;
     animation: fade 2s linear;
 }
 @keyframes fade {
