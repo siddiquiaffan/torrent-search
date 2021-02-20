@@ -42,11 +42,10 @@ async function find() {
                     <h5 class="text-left my-1">Seeders : ${actualdata[i].seeder}</h5>
                     <h5 class="text-left my-1">Size : ${actualdata[i].size}</h5>
                     <h6 class="text-left mt-3">Magnet Link :</h6>
-                    <textarea class="text-left w-100 text-grey p-1 magnet" onclick="copy('magnet${i+1}')" style="color:grey!important;outline:none;" id="magnet${i+1}" readonly> ${actualdata[i].magnet}</textarea>
+                    <a href="${actualdata[i].magnet}" target="_blank" title="Open the URL"> <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;outline:none;" id="magnet${i+1}" readonly> ${actualdata[i].magnet}</textarea> </a>
                     <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet${i+1}')">COPY</button>
                     <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
                     </div> `; 
-                    // result.insertAdjacentElement('beforeend',htmlData);
                     result_div.innerHTML += htmlData;
                 }
             query.placeholder = "Enter Your query";
