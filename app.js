@@ -1,5 +1,11 @@
 window.onload = function() {
-    document.querySelector('#query').focus();
+    let term = document.querySelector('#query')
+    term.focus();
+    const params = new URLSearchParams(window.location.search);
+    if(params.has('search')){
+        term.value = params.get('search');
+        find(params.get('search'));
+    }
 }
 const setHeaders = {
     headers: {
@@ -7,60 +13,58 @@ const setHeaders = {
     }
 }
 
-async function find() {
+async function find(search) {
     let result = document.getElementById("result");
     let result_div = document.getElementById("result_div");
     let submit = document.querySelector('#submit');
     let loading = document.querySelector('#loading');
     let query_name = document.querySelector('#query_name');
     result.style.display = 'none';
-    let query = document.querySelector('#query');
 
-        if(query == ''){
+        if(search == ''){
             alert('Please enter a valid query');
         }else{
             loading.style.display = 'block';
             query.disabled = true;
             query.disabled = false;
-        }
 
-        try{
-            var apidata = await fetch('https://api.sumanjay.cf/torrent/?query='+query.value , setHeaders);
-            var actualdata = await apidata.json();
+            try{
+                var apidata = await fetch('https://api.sumanjay.cf/torrent/?query='+search , setHeaders);
+                var actualdata = await apidata.json();
+                
+                if(actualdata[0] == undefined){
+                    result.style.display = 'none';
+                }else{
+                    result_div.innerHTML = "";
+                    result.style.display = 'block';
+                    loading.style.display = 'none';
+                    query_name.innerHTML = `<span>You searched for <i>'${search}'</i>.</span>`;
+                        for(let i=0; i < 10; i++) {
+                            var htmlData =`<div class="res${i+1}">
+                            <h5 class="text-left mt-4">Title : ${actualdata[i].name}</h5>
+                            <h5 class="text-left my-1">Leechers : ${actualdata[i].leecher}</h5>
+                            <h5 class="text-left my-1">Seeders : ${actualdata[i].seeder}</h5>
+                            <h5 class="text-left my-1">Size : ${actualdata[i].size}</h5>
+                            <h6 class="text-left mt-3">Magnet Link :</h6>
+                            <a href="${actualdata[i].magnet}" target="_blank" title="Open the URL"> <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;outline:none;" id="magnet${i+1}" readonly> ${actualdata[i].magnet}</textarea> </a>
+                            <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet${i+1}')">COPY</button>
+                            <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
+                            </div> `; 
+                            result_div.innerHTML += htmlData;
+                        }
+                    query.placeholder = "Enter Your query";
 
-        if(actualdata[0] == undefined){
-            result.style.display = 'none';
-        }else{
-            result_div.innerHTML = "";
-            result.style.display = 'block';
-            loading.style.display = 'none';
-            query_name.innerHTML = `<span>You searched for <i>'${query.value}'</i>.</span>`;
-                for(let i=0; i < 10; i++) {
-                    var htmlData =`<div class="res${i+1}">
-                    <h5 class="text-left mt-4">Title : ${actualdata[i].name}</h5>
-                    <h5 class="text-left my-1">Leechers : ${actualdata[i].leecher}</h5>
-                    <h5 class="text-left my-1">Seeders : ${actualdata[i].seeder}</h5>
-                    <h5 class="text-left my-1">Size : ${actualdata[i].size}</h5>
-                    <h6 class="text-left mt-3">Magnet Link :</h6>
-                    <a href="${actualdata[i].magnet}" target="_blank" title="Open the URL"> <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;outline:none;" id="magnet${i+1}" readonly> ${actualdata[i].magnet}</textarea> </a>
-                    <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet${i+1}')">COPY</button>
-                    <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
-                    </div> `; 
-                    result_div.innerHTML += htmlData;
+                    }
+                
+            }catch(e){
+                        swal("Sorry!","Sorry , we couldn't find torrent related to your query. Please try with some other query.","error");
+                        loading.style.display= "none";
+                        query.value = "";
+                        query.placeholder = "Please try with some other keyword";
+                        query.disabled = false;
                 }
-            query.placeholder = "Enter Your query";
-
-            }
-        }catch(e){
-                swal("Sorry!","Sorry , we couldn't find torrent related to your query. Please try with some other query.","error");
-                loading.style.display= "none";
-                query.value = "";
-                query.placeholder = "Please try with some other keyword";
-                query.disabled = false;
         }
-
-        };
-
+    }
         // FUnuction to copy magnet to clipboard
     function copy(id){
             let text = document.querySelector(`#${id}`); 
