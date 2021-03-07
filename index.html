@@ -23,11 +23,10 @@
   <img class="theme" src="assets/brightness.svg" title="Theme" onclick="changeTheme()">
   <div class="main">
     <div class="center">
-      <form action="" class="form" id="form"></form>
-      <div class="input-group py-5 px-2 search_div">
-        <input type="search" class="form-control shadow" id="query" placeholder="Enter Your Query" onsearch="javascript:find(document.querySelector('#query').value)">
-        <input type="submit" class="input-group-text btn btn-primary shadow" id="submit" value="Search"
-          onclick="javascript:find(document.querySelector('#query').value)">
+      <form method="GET" class="form py-5 px-2 middle" id="form" >
+      <div class="input-group search_div">
+        <input type="search" class="form-control shadow" id="query" name="query" placeholder="Enter Your Query">
+        <input type="submit" class="input-group-text btn btn-primary shadow" id="submit" value="Search">
       </div>
       </form>
 

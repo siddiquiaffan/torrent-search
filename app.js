@@ -2,9 +2,9 @@ window.onload = function() {
     let term = document.querySelector('#query')
     term.focus();
     const params = new URLSearchParams(window.location.search);
-    if(params.has('search')){
-        term.value = params.get('search');
-        find(params.get('search'));
+    if(params.has('query')){
+        term.value = params.get('query');
+        find(params.get('query'));
     }
 }
 const setHeaders = {
@@ -12,6 +12,13 @@ const setHeaders = {
         Accept: 'application/json',
     }
 }
+// document.querySelector('#submit').onclick = (e) => {
+//     find(document.querySelector('#query').value);
+// }
+
+// document.querySelector('#form').addEventListener('onsubmit', (e) => {
+//     find(document.querySelector('#query').value);
+// })
 
 async function find(search) {
     let result = document.getElementById("result");
