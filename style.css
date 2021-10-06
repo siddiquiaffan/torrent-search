@@ -232,6 +232,6 @@ h5::-webkit-scrollbar-thumb:hover{
         margin: 20px 0;
     }
     #title1,#title2,#title3,#title4,#title5{
-        overflow-x: auto;
+        word-wrap: break-word;
     }
 }
