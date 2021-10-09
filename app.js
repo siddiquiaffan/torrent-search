@@ -45,18 +45,19 @@ async function find(search) {
                     result_div.innerHTML = "";
                     result.style.display = 'block';
                     loading.style.display = 'none';
-                    query_name.innerHTML = `<span>You searched for <i>'${search}'</i>.</span>`;
+                    query_name.innerHTML = `<span>Search Results For <i>'${search}'</i>.</span>`;
                         for(let i=0; i < 10; i++) {
-                            var htmlData =`<div class="res${i+1}">
-                            <h5 class="text-left mt-4">Title : ${actualdata[i].name}</h5>
-                            <h5 class="text-left my-1">Leechers : ${actualdata[i].leecher}</h5>
-                            <h5 class="text-left my-1">Seeders : ${actualdata[i].seeder}</h5>
-                            <h5 class="text-left my-1">Size : ${actualdata[i].size}</h5>
-                            <h6 class="text-left mt-3">Magnet Link :</h6>
-                            <a href="${actualdata[i].magnet}" target="_blank" title="Open the URL"> <textarea class="text-left w-100 text-grey p-1 magnet" style="color:grey!important;outline:none;" id="magnet${i+1}" readonly> ${actualdata[i].magnet}</textarea> </a>
-                            <button class="btn btn-primary text-center mx-auto" onclick="copy('magnet${i+1}')">COPY</button>
-                            <hr class="mx-auto my-5" style="width:80%;text-align:center;background:#fff;">
-                            </div> `; 
+                            var htmlData =`
+                            <div class='card mb-3'>
+                                <h5 class="name">${actualdata[i].name.substring(0, 80)}</h5>
+                                <h6 class="ls">Leechers : ${actualdata[i].leecher} | Seeders : ${actualdata[i].seeder}</h6>
+                                <div class="btns">
+                                    <span title='Copy to magnet to clipboard' onclick="copy('${actualdata[i].magnet}')"> <i class="fas fa-copy icon"></i> </span>
+                                    <span title='Open magnet URI' onclick="openMagnet('${actualdata[i].magnet}')"> <i class="fas fa-external-link-alt icon"></i> </span>
+                                    <span title='Share magnet URI' onclick="share('${actualdata[i].magnet}')"> <i class="fas fa-share icon"></i> </span>
+                                </div>
+                            <div>
+                            `; 
                             result_div.innerHTML += htmlData;
                         }
                     query.placeholder = "Enter Your query";
@@ -73,13 +74,28 @@ async function find(search) {
         }
     }
         // FUnuction to copy magnet to clipboard
-    function copy(id){
-            let text = document.querySelector(`#${id}`); 
-            navigator.clipboard.writeText(text.value).then(()=>{
+    function copy(magnet){
+            navigator.clipboard.writeText(magnet).then(()=>{
             swal("Success","Magnet URL copied to to clipboard!","success");
         }).catch((error)=>{
             swal("An error has been occurred while copying magnet , Please copy it manually","error");
         });
+    }
+
+    function openMagnet(magnet) {
+        window.open(magnet);
+    }
+
+    function share(magnet) {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Torrent Search',
+                text: magnet,
+                url: ''
+            })
+        } else {
+            swal("Sorry!","Your browser doesn't support this feature","error");
+        }
     }
 
     // Code for changing Theme
@@ -91,13 +107,14 @@ async function find(search) {
         document.querySelector(".theme").setAttribute("src", "assets/night-mode.svg");
         document.body.style.background = "var(--main-bg-light)";
         document.body.style.color = "var(--text-light)";
-        document.querySelector("#loading").style.borderLeft = "2px solid #000";
         document.querySelector(".center").style.background = "var(--center-bg-light)";
-        document.querySelector("h1").classList.replace("text-white", "text-dark");
-        document.querySelector("h2").classList.replace("text-white","text-dark");
-        document.querySelectorAll("HR").forEach(function(element) {
-            element.style.background = "#000";
-        });
+        document.querySelector("#loading").style.borderLeft = "2px solid #000";
+        document.querySelector("body > h2").classList.toggle('text-white');
+        document.querySelector("#query_name").style.textShadow = "0 0 5px rgba(27, 96, 185, 0.3)";
+        document.querySelectorAll(".card").forEach(card => {
+            card.style.boxShadow = "0px 0px 20px rgba(27, 96, 185, 0.2)";
+            card.style.background = "rgba(27, 96, 185, 0.2)"
+        })
         document.querySelector("#footer").style.background = "var(--main-bg-light)";
         document.querySelector("#footer").style.color = "var(--text-light)";
         document.querySelector(".theme").style.border = "2px dashed #ff0095";
@@ -111,9 +128,12 @@ async function find(search) {
         document.body.style.color = "var(--text-dark)";
         document.querySelector("#loading").style.borderLeft = "2px solid rgb(156, 169, 209)";
         document.querySelector(".center").style.background = "var(--center-bg-dark)";
-        document.querySelector("h1").classList.replace("text-dark", "text-white");
-        document.querySelector("h2").classList.replace("text-dark","text-white");
-        document.querySelector("hr").style.background = "#fff";
+        document.querySelector("body > h2").classList.toggle('text-white');
+        document.querySelector("#query_name").style.textShadow = "0 0 15px rgba(0,0,0)";
+        document.querySelectorAll(".card").forEach(card => {
+            card.style.boxShadow = "0px 0px 10px rgb(0,0,0,0.1)";
+            card.style.background = "var(--center-bg-light)"
+        })
         document.querySelector("#footer").style.background = "var(--main-bg-dark)";
         document.querySelector("#footer").style.color = "var(--text-dark)";
         document.querySelector(".theme").style.border = "2px dashed #00ffe5 ";
